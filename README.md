@@ -75,22 +75,21 @@ const books = await prisma.book.findMany({
 2. **Define the User Model**:
    - Open `prisma/schema.prisma`
    - Define the User model based on your current in-memory structure
+   - Replace the default postgres config with an sqlite config (edit the `datasource` block)
+   - Apply changes to the database: `npx prisma db push`
 
 3. **Generate Prisma Client**:
    - Run `npx prisma generate`
 
 4. **Update Repository**:
-   - Create a new file `PrismaUserRepository.ts`
-   - Implement the `UserRepository` interface using Prisma Client
+   - Find the file named `PrismaUserRepository.ts`
+   - Implement every functions interface using Prisma Client
 
-5. **Modify Use Cases**:
-   - Update `RegisterNewUser.ts` and `LoginUser.ts` to use the new Prisma repository
+5. **Update API Routes**:
+   - Replace the `userRepository` instance exported in `index.ts` with the new Prisma implementation
 
-6. **Update API Routes**:
-   - Modify `HonoRouter.ts` to use the Prisma-based use cases
-
-7. **Testing**:
-   - Update or create new tests to ensure the Prisma implementation works correctly
+6. **Testing**:
+   - Update or create new tests to ensure the Prisma implementation works correctly. You can use tools such as Postman or Insomnia (recommanded) to test the API endpoints.
 
 Remember to handle database connections properly, typically by creating a single PrismaClient instance and reusing it across requests.
 
